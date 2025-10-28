@@ -1,0 +1,10 @@
+{% extends 'inventario/base.html' %}
+{% block content %}
+<h3>{% if form.instance.pk %}Editar{% else %}Nuevo{% endif %} Producto</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

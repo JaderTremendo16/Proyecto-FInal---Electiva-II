@@ -1,0 +1,64 @@
+{% extends 'inventario/base.html' %}
+{% block title %}Listado de Productos{% endblock %}
+{% block content %}
+
+<h3 class="mb-3">Listado de Productos</h3>
+
+<form method="get" class="row g-2 mb-4">
+    <div class="col-md-3">
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar producto..." class="form-control">
+    </div>
+    <div class="col-md-3">
+        <select name="categoria" class="form-select">
+            <option value="">Todas las categorías</option>
+            {% for c in categorias %}
+                <option value="{{ c.id }}" {% if c.id|stringformat:"s" == categoria_id %}selected{% endif %}>{{ c.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select name="proveedor" class="form-select">
+            <option value="">Todos los proveedores</option>
+            {% for p in proveedores %}
+                <option value="{{ p.id }}" {% if p.id|stringformat:"s" == proveedor_id %}selected{% endif %}>{{ p.nombre }}</option>
+            {% endfor %}
+        </select>
+    <div class="col-md-1">
+        <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+    </div>
+</form>
+
+<a href="{% url 'crear_producto' %}" class="btn btn-success mb-3">+ Agregar Producto</a>
+
+<!-- Tabla -->
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Proveedor</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in productos %}
+        <tr class="{% if p.cantidad < 10 %}table-warning{% endif %}">
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.categoria }}</td>
+            <td>{{ p.proveedor }}</td>
+            <td>{{ p.cantidad }}</td>
+            <td>${{ p.precio }}</td>
+            <td>
+                <a href="{% url 'editar_producto' p.id %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'eliminar_producto' p.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="text-center">No hay productos registrados</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
