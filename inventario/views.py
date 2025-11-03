@@ -3,6 +3,7 @@ from .models import Producto, Categoria, Proveedor
 from .forms import ProductoForm
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from .forms import CategoriaForm, ProveedorForm
 
 # LISTAR
 @login_required
@@ -97,3 +98,78 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+# ---------- CATEGORÍAS ----------
+
+@login_required
+def lista_categorias(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'inventario/lista_categorias.html', {'categorias': categorias})
+
+@login_required
+def crear_categoria(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm()
+    return render(request, 'inventario/crear_categoria.html', {'form': form})
+
+@login_required
+def editar_categoria(request, pk):
+    categoria = get_object_or_404(Categoria, pk=pk)
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm(instance=categoria)
+    return render(request, 'inventario/editar_categoria.html', {'form': form})
+
+@login_required
+def eliminar_categoria(request, pk):
+    categoria = get_object_or_404(Categoria, pk=pk)
+    if request.method == 'POST':
+        categoria.delete()
+        return redirect('lista_categorias')
+    return render(request, 'inventario/eliminar_categoria.html', {'categoria': categoria})
+
+
+# ---------- PROVEEDORES ----------
+@login_required
+def lista_proveedores(request):
+    proveedores = Proveedor.objects.all()
+    return render(request, 'inventario/lista_proveedores.html', {'proveedores': proveedores})
+
+@login_required
+def crear_proveedor(request):
+    if request.method == 'POST':
+        form = ProveedorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_proveedores')
+    else:
+        form = ProveedorForm()
+    return render(request, 'inventario/crear_proveedor.html', {'form': form})
+
+@login_required
+def editar_proveedor(request, pk):
+    proveedor = get_object_or_404(Proveedor, pk=pk)
+    if request.method == 'POST':
+        form = ProveedorForm(request.POST, instance=proveedor)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_proveedores')
+    else:
+        form = ProveedorForm(instance=proveedor)
+    return render(request, 'inventario/editar_proveedor.html', {'form': form})
+
+@login_required
+def eliminar_proveedor(request, pk):
+    proveedor = get_object_or_404(Proveedor, pk=pk)
+    if request.method == 'POST':
+        proveedor.delete()
+        return redirect('lista_proveedores')
+    return render(request, 'inventario/eliminar_proveedor.html', {'proveedor': proveedor})

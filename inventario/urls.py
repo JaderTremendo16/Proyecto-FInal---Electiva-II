@@ -8,4 +8,15 @@ urlpatterns = [
     path('eliminar/<int:pk>/', views.eliminar_producto, name='eliminar_producto'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+       # CATEGORÍAS
+path('categorias/', views.lista_categorias, name='lista_categorias'),
+path('categorias/crear/', views.crear_categoria, name='crear_categoria'),
+path('categorias/editar/<int:pk>/', views.editar_categoria, name='editar_categoria'),
+path('categorias/eliminar/<int:pk>/', views.eliminar_categoria, name='eliminar_categoria'),
+
+# PROVEEDORES
+path('proveedores/', views.lista_proveedores, name='lista_proveedores'),
+path('proveedores/crear/', views.crear_proveedor, name='crear_proveedor'),
+path('proveedores/editar/<int:pk>/', views.editar_proveedor, name='editar_proveedor'),
+path('proveedores/eliminar/<int:pk>/', views.eliminar_proveedor, name='eliminar_proveedor'),
 ]

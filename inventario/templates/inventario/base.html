@@ -2,16 +2,24 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Inventario{% endblock %}</title>
+    <title>Inventario</title>
 </head>
-{% if user.is_authenticated %}
-    <a href="{% url 'logout' %}" class="btn btn-outline-danger float-end">Cerrar Sesión</a>
-{% endif %}
+<body>
+    <h1>Sistema de Inventario</h1>
+    <hr>
 
-<body class="bg-light p-4">
-    <div class="container">
-        <h1 class="mb-4 text-center">Sistema de Inventario</h1>
-        {% block content %}{% endblock %}
-    </div>
+    <p>
+        <a href="{% url 'lista_productos' %}">Productos</a> |
+        <a href="{% url 'lista_categorias' %}">Categorías</a> |
+        <a href="{% url 'lista_proveedores' %}">Proveedores</a> |
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </p>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+
+    <hr>
 </body>
 </html>
