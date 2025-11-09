@@ -1,24 +1,75 @@
-{% extends 'inventario/base.html' %}
-{% block content %}
-<h3>Categorías</h3>
-<a href="{% url 'crear_categoria' %}" class="btn btn-success mb-3">+ Nueva Categoría</a>
+{% extends 'inventario/base.html' %} {% block content %}
 
-<table class="table table-striped">
-  <thead>
-    <tr><th>Nombre</th><th>Acciones</th></tr>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="text-primary">Lista de Categorías</h2>
+  <a href="{% url 'crear_categoria' %}" class="btn btn-success">
+    <i class="bi bi-plus-circle"></i> Nueva categoría
+  </a>
+</div>
+
+<table class="table table-hover table-bordered align-middle">
+  <thead class="text-center">
+    <tr>
+      <th>Nombre</th>
+      <th>Acciones</th>
+    </tr>
   </thead>
   <tbody>
-    {% for c in categorias %}
-      <tr>
-        <td>{{ c.nombre }}</td>
-        <td>
-          <a href="{% url 'editar_categoria' c.id %}" class="btn btn-sm btn-warning">Editar</a>
-          <a href="{% url 'eliminar_categoria' c.id %}" class="btn btn-sm btn-danger">Eliminar</a>
-        </td>
-      </tr>
+    {% for categoria in categorias %}
+    <tr>
+      <td>{{ categoria.nombre }}</td>
+      <td class="text-center">
+        <a
+          href="{% url 'editar_categoria' categoria.id %}"
+          class="btn btn-warning btn-sm"
+        >
+          <i class="bi bi-pencil-square"></i> Editar
+        </a>
+        <form
+          action="{% url 'eliminar_categoria' categoria.id %}"
+          method="post"
+          style="display: inline"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm btn-eliminar">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+        </form>
+      </td>
+    </tr>
     {% empty %}
-      <tr><td colspan="2">No hay categorías</td></tr>
+    <tr>
+      <td colspan="2" class="text-center text-muted">
+        No hay categorías registradas.
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".btn-eliminar").forEach(btn => {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const form = this.closest("form");
+
+      Swal.fire({
+        title: "¿Eliminar registro?",
+        text: "Esta acción no se puede deshacer.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#dc3545",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          form.submit();
+        }
+      });
+    });
+  });
+});
+</script>
+
 {% endblock %}

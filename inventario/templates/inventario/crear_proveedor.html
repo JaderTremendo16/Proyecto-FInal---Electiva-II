@@ -1,11 +1,25 @@
 {% extends 'inventario/base.html' %}
 {% block content %}
-<h2>Agregar nuevo proveedor</h2>
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Guardar</button>
-  <a href="{% url 'lista_proveedores' %}">Cancelar</a>
-</form>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="text-primary mb-4">
+            <i class="bi bi-plus-circle"></i> Agregar Proveedor
+        </h2>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-save"></i> Guardar
+            </button>
+            <a href="{% url 'lista_proveedores' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Cancelar
+            </a>
+        </form>
+    </div>
+</div>
+
 {% endblock %}
