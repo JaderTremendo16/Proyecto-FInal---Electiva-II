@@ -1,9 +1,9 @@
 # Sistema de Inventario – Proyecto Final (Django)
 
 > Proyecto Final para Electiva II  
-> Universidad Cooperativa de Colombia 
-> Desarrollado por Jader Torres, Mateo Arroyo y Sebastián Rivero
-> Enlace del Funcionamiento del proyecto: 
+> Universidad Cooperativa de Colombia Montería  
+> Desarrollado por Jader Torres, Mateo Arroyo y Sebastián Rivero    
+> Enlace del Funcionamiento del proyecto: https://www.youtube.com/watch?v=RHSaQOFFf8w
 
 ## Descripción general
 
