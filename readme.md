@@ -23,12 +23,12 @@ Este proyecto integra conceptos de desarrollo backend, frontend y bases de datos
 
 ## Tecnologías utilizadas
 
-**Framework:** Django 
-**Lenguaje:** Python 
-**Base de datos:** SQLite3
-**Frontend:** HTML5, CSS, Bootstrap, SweetAlert2
-**Control de versiones:** Git + GitHub
-**Entorno virtual:** venv 
+**Framework:** Django   
+**Lenguaje:** Python    
+**Base de datos:** SQLite3  
+**Frontend:** HTML5, CSS, Bootstrap, SweetAlert2    
+**Control de versiones:** Git + GitHub  
+**Entorno virtual:** venv    
 
 ## Instalación y configuración
 
@@ -45,10 +45,7 @@ cd Proyecto_Final
 
 python -m venv venv
 
-
 ### 4. Activar entorno virtual
-
-**Windows:**
 
 venv\Scripts\activate
 
